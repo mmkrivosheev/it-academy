@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>N.03 ANKETA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <script>
+        const lastName = requestAndCheckName("ваша фамилия?");
+        const firstName = requestAndCheckName("ваше имя?");
+        const patronymic = requestAndCheckName("ваше отчество?");
+        const age = requestAndCheckAge("ваш возраст (в годах)?");
+        const gender = confirm("ваш пол - мужской? (нажмите 'Отмена' - если нет)")
+            ? "мужской"
+            : "женский";
+
+        alert(`
+            ваше ФИО: ${lastName} ${firstName} ${patronymic}
+            ваш возраст в годах: ${age}
+            ваш возраст в днях: ${age * 365}
+            через 5 лет вам будет: ${age + 5}
+            ваш пол: ${gender}
+            вы на пенсии: ${isPensioner(age, gender)}
+        `);
+
+    function requestAndCheckName(question) {
+        while (true) {
+            const response = prompt(question);
+            const isOnlyLetters = /^[a-zа-я]+$/i.test(response);
+
+            if (response && isOnlyLetters)
+                return response;
+        }
+    }
+
+    function requestAndCheckAge(question) {
+        while (true) {
+            const response = +prompt(question);
+
+            if (response && !isNaN(response))
+                return response;
+        }
+    }
+
+    function isPensioner(age, gender) {
+        return (
+            gender === "мужской" && age >= 65
+                || gender === "женский" && age >= 58
+                    ? "да"
+                    : "нет"
+        );
+    }
+    </script>
+</body>
+</html>
