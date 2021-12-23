@@ -1,0 +1,43 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: #000;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+p {
+    text-align: center;
+    height: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form input {
+    font: inherit;
+    width: 400px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.form button {
+    font: inherit;
+    padding: 5px;
+    margin: 30px;
+}

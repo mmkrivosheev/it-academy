@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>n.05_treeSum</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Расчет суммы всех числовых элементов массива</h1>
+    <p> Элементы массива могут быть числами или снова массивами</p>
+    <form class="form">
+        <input id="input" type="text">
+        <button id="btn" type="button">Расчитать</button>
+    </form>
+    <p id="result"></p>
+    <script>
+        let input = document.getElementById("input");
+        input.value = "[5, 7, [ 4, [2], 8, [1,3], 2 ], [ 9, [] ], 1, 8]";
+        let btn = document.getElementById("btn");
+        let result = document.getElementById("result");
+
+        btn.addEventListener("click", () => {
+            const arr = JSON.parse(input.value);
+            result.innerHTML = `Результат ${treeSum(arr)}`;
+        });
+
+        input.addEventListener("input", () => {
+            result.innerHTML = "";
+        });
+
+        function treeSum(arr) {
+            let sum = 0;
+
+            arr.forEach(item => {
+                if (typeof item === "number")
+                    sum += item;
+                else
+                    sum += treeSum(item);
+            });
+
+            return sum;
+        }
+    </script>
+</body>
+</html>

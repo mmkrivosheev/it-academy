@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>remove_spaces</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Удаление из строки всех начальных и конечных пробелов</h1>
+    <p>Введите текст</p>
+    <form class="form">
+        <input id="input" type="text">
+        <button id="btn" type="button">Удалить пробелы</button>
+    </form>
+    <p id="result"></p>
+    <script>
+        let input = document.getElementById("input");
+        let btn = document.getElementById("btn");
+        let result = document.getElementById("result");
+
+        btn.addEventListener("click", () => {
+            const string = input.value;
+            result.innerHTML = `${removeSpaces(string)}`;
+        });
+
+        input.addEventListener("input", () => {
+            result.innerHTML = "";
+        });
+
+        function removeSpaces(string) {
+            while (true) {
+                if (string[0] === " ")
+                    string = string.slice(1);
+                else
+                    break;
+            }
+
+            while (true) {
+                if (string[string.length - 1] === " ")
+                    string = string.slice(0, string.length - 1);
+                else
+                    break;
+            }
+
+            return `=${string}=`;
+        }
+    </script>
+</body>
+</html>
