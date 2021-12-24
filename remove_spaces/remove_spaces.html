@@ -23,7 +23,7 @@
 
         btn.addEventListener("click", () => {
             const string = input.value;
-            result.innerHTML = `${removeSpaces(string)}`;
+            result.innerHTML = `=${removeSpaces(string)}=`;
         });
 
         input.addEventListener("input", () => {
@@ -31,21 +31,30 @@
         });
 
         function removeSpaces(string) {
-            while (true) {
-                if (string[0] === " ")
-                    string = string.slice(1);
-                else
+            let start = "";
+            let end = "";
+
+            for (let i = 0; i <= string.length; i++) {
+                if (string[i] !== " ") {
+                    start = 0;
                     break;
+                } else if (string[i] === " " && string[i + 1] !== " ") {
+                    start = i + 1;
+                    break;
+                }
             }
 
-            while (true) {
-                if (string[string.length - 1] === " ")
-                    string = string.slice(0, string.length - 1);
-                else
+            for (let i = string.length - 1; i >= 0; i--) {
+                if (string[i] !== " ") {
+                    end = i + 1;
                     break;
+                } else if (string[i] === " " && string[i - 1] !== " ") {
+                    end = i;
+                    break;
+                }
             }
 
-            return `=${string}=`;
+            return string.slice(start, end);
         }
     </script>
 </body>

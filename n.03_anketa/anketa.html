@@ -8,25 +8,19 @@
 </head>
 <body>
     <script>
-        const MALE = "мужской";
-        const FEMALE = "женский";
-        const YES = "да";
-        const NO = "нет";
         const lastName = requestAndCheckName("ваша фамилия?");
         const firstName = requestAndCheckName("ваше имя?");
         const patronymic = requestAndCheckName("ваше отчество?");
         const age = requestAndCheckAge("ваш возраст (в годах)?");
-        const gender = confirm("ваш пол - мужской? (нажмите 'Отмена' - если нет)")
-            ? MALE
-            : FEMALE;
+        const isMan = confirm("ваш пол - мужской? (нажмите 'Отмена' - если нет)");
 
         alert(`
             ваше ФИО: ${lastName} ${firstName} ${patronymic}
             ваш возраст в годах: ${age}
             ваш возраст в днях: ${age * 365}
             через 5 лет вам будет: ${age + 5}
-            ваш пол: ${gender}
-            вы на пенсии: ${isPensioner(age, gender)}
+            ваш пол: ${isMan ? "мужской" : "женский"}
+            вы на пенсии: ${isPensioner(age, isMan) ? "да" : "нет"}
         `);
 
     function requestAndCheckName(question) {
@@ -48,13 +42,9 @@
         }
     }
 
-    function isPensioner(age, gender) {
-        return (
-            gender === MALE && age >= 65
-                || gender === FEMALE && age >= 58
-                    ? YES
-                    : NO
-        );
+    function isPensioner(age, isMan) {
+        return isMan === true && age >= 65
+                || isMan === false && age >= 58;
     }
     </script>
 </body>
