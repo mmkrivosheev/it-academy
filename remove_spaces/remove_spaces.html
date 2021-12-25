@@ -31,27 +31,21 @@
         });
 
         function removeSpaces(string) {
-            let start = "";
-            let end = "";
+            let start = 0;
+            let end = string.length;
 
             for (let i = 0; i <= string.length; i++) {
-                if (string[i] !== " ") {
-                    start = 0;
+                if (string[i] === " ")
+                    start++;
+                else
                     break;
-                } else if (string[i] === " " && string[i + 1] !== " ") {
-                    start = i + 1;
-                    break;
-                }
             }
 
             for (let i = string.length - 1; i >= 0; i--) {
-                if (string[i] !== " ") {
-                    end = i + 1;
+                if (string[i] === " ")
+                    end--;
+                else
                     break;
-                } else if (string[i] === " " && string[i - 1] !== " ") {
-                    end = i;
-                    break;
-                }
             }
 
             return string.slice(start, end);
