@@ -8,27 +8,27 @@
 </head>
 <body>
     <script>
-            const str = prompt("введите строку");
+        const str = prompt("введите строку");
 
-            if (str)
-                console.log(
-                    "количесво русских гласных букв в строке:",
-                    calculateVowels(str)
-                );
+        if (str)
+            console.log(
+                "количесво русских гласных букв в строке:",
+                calculateVowels(str)
+            );
 
-            function calculateVowels(str) {
-                const vowels = ["а", "у", "о", "и", "э", "ы"];
-                let count = 0;
+        function calculateVowels(str) {
+            const vowels = ["а", "у", "о", "и", "э", "ы", "е", "ё", "ю", "я"];
+            let count = 0;
 
-                str = str.toLowerCase();
+            str = str.toLowerCase();
 
-                for (let i of str) {
-                   if (vowels.includes(i))
-                       count++;
-                }
-
-               return count;
+            for (let i of str) {
+               if (vowels.includes(i))
+                   count++;
             }
+
+           return count;
+        }
     </script>
 </body>
 </html>

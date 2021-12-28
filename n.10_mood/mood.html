@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>n.10_mood</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <script>
+        function randomDiap(n, m) {
+            return Math.floor(Math.random() * (m - n + 1)) + n;
+        }
+
+        function mood(colorsCount) {
+            let colors = ["", "красный", "оранжевый", "жёлтый", "зелёный", "голубой", "синий", "фиолетовый"];
+            const colorsUsed = {};
+
+            console.log(`цветов: ${colorsCount}`);
+
+            for (let i = 1; i <= colorsCount; i++) {
+                let n = randomDiap(1, 7);
+                let colorName = colors[n];
+
+                if ( !(colorName in colorsUsed) ) {
+                    colorsUsed[colorName] = true;
+                    console.log(colorName);
+                }
+            }
+        }
+
+        mood(20);
+    </script>
+</body>
+</html>
