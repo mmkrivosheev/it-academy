@@ -19,17 +19,21 @@
             console.log(`цветов: ${colorsCount}`);
 
             for (let i = 1; i <= colorsCount; i++) {
-                let n = randomDiap(1, 7);
-                let colorName = colors[n];
+                while (true) {
+                    let n = randomDiap(1, 7);
+                    let colorName = colors[n];
 
-                if ( !(colorName in colorsUsed) ) {
+                    if (colorName in colorsUsed)
+                        continue;
+
                     colorsUsed[colorName] = true;
                     console.log(colorName);
+                    break;
                 }
             }
         }
 
-        mood(20);
+        mood(3);
     </script>
 </body>
 </html>
