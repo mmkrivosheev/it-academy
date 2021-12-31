@@ -15,13 +15,13 @@
             .replace(/ъ/g, "ь")
             .replace(/ё/g, "е");
 
-        alert(isPalindrome(str)
+        alert(checkIsPalindrome(str)
             ? "строка является палиндромом"
             : "строка не является палиндромом"
         );
 
-        function isPalindrome(str) {
-            for (let i = 0; i < str.length; i++) {
+        function checkIsPalindrome(str) {
+            for (let i = 0; i < str.length / 2; i++) {
                 if (str[(str.length - 1) - i] !== str[i])
                     return false;
             }
