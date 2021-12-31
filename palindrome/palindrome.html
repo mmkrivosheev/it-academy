@@ -21,7 +21,7 @@
         );
 
         function checkIsPalindrome(str) {
-            for (let i = 0; i < str.length / 2; i++) {
+            for (let i = 0; i < Math.floor(str.length / 2); i++) {
                 if (str[(str.length - 1) - i] !== str[i])
                     return false;
             }
