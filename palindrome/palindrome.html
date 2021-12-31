@@ -10,18 +10,18 @@
     <script>
         let str = prompt("введите строку");
 
-        str = str.toLowerCase()
-            .replace(/[\s.,:;!?()"-]/g, "")
-            .replace(/ъ/g, "ь")
-            .replace(/ё/g, "е");
-
         alert(checkIsPalindrome(str)
             ? "строка является палиндромом"
             : "строка не является палиндромом"
         );
 
         function checkIsPalindrome(str) {
-            for (let i = 0; i < str.length / 2; i++) {
+            str = str.toLowerCase()
+                .replace(/[\s.,:;!?()"-]/g, "")
+                .replace(/ъ/g, "ь")
+                .replace(/ё/g, "е");
+
+            for (let i = 0; i < Math.floor(str.length / 2); i++) {
                 if (str[(str.length - 1) - i] !== str[i])
                     return false;
             }
