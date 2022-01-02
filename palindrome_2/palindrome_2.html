@@ -23,12 +23,15 @@
             return checkClearStringIsPalindrome(str);
         }
 
-        function checkClearStringIsPalindrome(str, i = 0) {
-            if (i >= Math.floor(str.length / 2))
+        function checkClearStringIsPalindrome(str) {
+            if (str.length <= 1)
                 return true;
 
-            if (str[(str.length - 1) - i] === str[i])
-                return checkClearStringIsPalindrome(str, i + 1);
+            if (str[0] === str[(str.length - 1)]) {
+                str = str.replace(/^.|.$/g, "");
+                return checkClearStringIsPalindrome(str);
+            }
+
 
             return false;
         }
