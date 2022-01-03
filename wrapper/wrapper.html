@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>wrapper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <script>
+        console.log(wrapP("Однажды в студёную зимнюю пору"));
+        console.log(wrapP("Однажды в студёную зимнюю пору",{lang:"ru"}));
+        console.log(wrapP("Однажды в <студёную> зимнюю пору"));
+        console.log(wrapH1("СТИХИ",{align:"center",title:"M&M's"}));
+
+        function wrapP(str, options = {}) {
+            const atrLang = options.lang ? ` lang=\"${options.lang}\"` : "";
+
+            str = replaceSymbols(str);
+            return `<p${atrLang}>${str}</p>`;
+        }
+
+        function wrapH1(str, options = {}) {
+            const atrAlign = options.align ? ` align=\"${options.align}\"` : "";
+            const atrTitle = options.title ? ` title=\"${replaceSymbols(options.title)}\"` : "";
+
+            str = replaceSymbols(str);
+            return `<h1${atrAlign}${atrTitle}>${str}</h1>`;
+        }
+
+        function replaceSymbols(str) {
+            return str.replace(/[<>'"&]/g, n => {
+                switch (n) {
+                    case "<": return "&lt;";
+                    case ">": return "&gt;";
+                    case "'": return "&apos;";
+                    case "\"": return "&quot;";
+                    case "&": return "&amp;";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
