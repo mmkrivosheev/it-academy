@@ -14,15 +14,18 @@
         console.log(wrapH1("СТИХИ",{align:"center",title:"M&M's"}));
 
         function wrapP(str, options = {}) {
-            const atrLang = options.lang ? ` lang=\"${options.lang}\"` : "";
+            const lang = options.lang;
+            const atrLang = lang ? ` lang=\"${lang}\"` : "";
 
             str = replaceSymbols(str);
             return `<p${atrLang}>${str}</p>`;
         }
 
         function wrapH1(str, options = {}) {
-            const atrAlign = options.align ? ` align=\"${options.align}\"` : "";
-            const atrTitle = options.title ? ` title=\"${replaceSymbols(options.title)}\"` : "";
+            const align = options.align;
+            const title = options.title;
+            const atrAlign = align ? ` align=\"${align}\"` : "";
+            const atrTitle = title ? ` title=\"${replaceSymbols(title)}\"` : "";
 
             str = replaceSymbols(str);
             return `<h1${atrAlign}${atrTitle}>${str}</h1>`;
