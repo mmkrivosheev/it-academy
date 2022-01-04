@@ -8,27 +8,19 @@
 </head>
 <body>
     <script>
-        console.log(wrapP("Однажды в студёную зимнюю пору"));
-        console.log(wrapP("Однажды в студёную зимнюю пору",{lang:"ru"}));
-        console.log(wrapP("Однажды в <студёную> зимнюю пору"));
-        console.log(wrapH1("СТИХИ",{align:"center",title:"M&M's"}));
+        function buildWrapper(teg) {
+            return function(str, options = {}) {
+                const keys = Object.keys(options);
+                let attrs = "";
 
-        function wrapP(str, options = {}) {
-            const lang = options.lang;
-            const atrLang = lang ? ` lang=\"${lang}\"` : "";
+                keys.forEach(key => {
+                    options[key] = replaceSymbols(options[key]);
+                    attrs += ` ${key}=\"${options[key]}\"`;
+                });
 
-            str = replaceSymbols(str);
-            return `<p${atrLang}>${str}</p>`;
-        }
-
-        function wrapH1(str, options = {}) {
-            const align = options.align;
-            const title = options.title;
-            const atrAlign = align ? ` align=\"${align}\"` : "";
-            const atrTitle = title ? ` title=\"${replaceSymbols(title)}\"` : "";
-
-            str = replaceSymbols(str);
-            return `<h1${atrAlign}${atrTitle}>${str}</h1>`;
+                str = replaceSymbols(str);
+                return `<${teg}${attrs}>${str}</${teg}>`;
+            }
         }
 
         function replaceSymbols(str) {
@@ -42,6 +34,14 @@
                 }
             });
         }
+
+        const wrapP = buildWrapper("p");
+        const wrapH1 = buildWrapper("h1");
+
+        console.log(wrapP("Однажды в студёную зимнюю пору"));
+        console.log(wrapP("Однажды в студёную зимнюю пору",{lang:"ru"}));
+        console.log(wrapP("Однажды в <студёную> зимнюю пору"));
+        console.log(wrapH1("СТИХИ",{align:"center",title:"M&M's"}));
     </script>
 </body>
 </html>
