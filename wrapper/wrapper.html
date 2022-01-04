@@ -10,6 +10,9 @@
     <script>
         function buildWrapper(teg) {
             return function(str, options = {}) {
+                str = replaceSymbols(str);
+                options = {...options};
+
                 const keys = Object.keys(options);
                 let attrs = "";
 
@@ -18,7 +21,6 @@
                     attrs += ` ${key}=\"${options[key]}\"`;
                 });
 
-                str = replaceSymbols(str);
                 return `<${teg}${attrs}>${str}</${teg}>`;
             }
         }
