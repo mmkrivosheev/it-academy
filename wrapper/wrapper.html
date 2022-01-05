@@ -11,14 +11,12 @@
         function buildWrapper(teg) {
             return function(str, options = {}) {
                 str = replaceSymbols(str);
-                options = {...options};
 
                 const keys = Object.keys(options);
                 let attrs = "";
 
                 keys.forEach(key => {
-                    options[key] = replaceSymbols(options[key]);
-                    attrs += ` ${key}=\"${options[key]}\"`;
+                    attrs += ` ${key}=\"${replaceSymbols(options[key])}\"`;
                 });
 
                 return `<${teg}${attrs}>${str}</${teg}>`;
