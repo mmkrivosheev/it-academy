@@ -17,8 +17,7 @@
 
         function checkIsPalindrome(str) {
             str = str.toLowerCase()
-                .replace(/[\s.,:;!?()"-]/g, "")
-                .replace(/ъ/g, "ь")
+                .replace(/[ъь\s.,:;!?()"-]/g, "")
                 .replace(/ё/g, "е");
 
             for (let i = 0; i < Math.floor(str.length / 2); i++) {
