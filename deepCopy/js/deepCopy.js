@@ -11,12 +11,8 @@ function deepCopy(src) {
 function deepCopyArray(src) {
     const copy = [];
 
-    for (let i = 0; i < src.length; i++) {
-        if (typeof src[i] !== "object")
-            copy[i] = src[i];
-        else
-            copy[i] = deepCopy(src[i]);
-    }
+    for (let i = 0; i < src.length; i++)
+        copy[i] = deepCopy(src[i]);
 
     return copy;
 }
@@ -24,12 +20,8 @@ function deepCopyArray(src) {
 function deepCopyObject(src) {
     const copy = {};
 
-    for (let key in src) {
-        if (typeof src[key] !== "object")
-            copy[key] = src[key];
-        else
-            copy[key] = deepCopy(src[key]);
-    }
+    for (let key in src)
+        copy[key] = deepCopy(src[key]);
 
     return copy;
 }
