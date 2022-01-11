@@ -29,8 +29,8 @@ document.getElementById("btn-1").addEventListener("click", () => {
 
     if (!drink) return;
 
-    const isAlcoholic = confirm("ваш напиток алкогольный? (нажмите 'Отмена' - если нет)") ? "да" : "нет";
-    const recipe = prompt("введите рецепт напитка") || "не указан";
+    const isAlcoholic = confirm("ваш напиток алкогольный? (нажмите 'Отмена' - если нет)");
+    const recipe = prompt("введите рецепт напитка");
 
     drinkStorage.addValue(drink, {isAlcoholic, recipe});
 });
@@ -47,8 +47,8 @@ document.getElementById("btn-2").addEventListener("click", () => {
     if (drink in drinkStorage)
         alert(`
             напиток ${drink}
-            алкогольный: ${drinkStorage.getValue(drink).isAlcoholic}
-            рецепт приготовления: ${drinkStorage.getValue(drink).recipe}
+            алкогольный: ${drinkStorage.getValue(drink).isAlcoholic ? "да" : "нет"}
+            рецепт приготовления: ${drinkStorage.getValue(drink).recipe || "не указан"}
         `);
     else
         alert("данный напиток отсутствует в хранилище");
