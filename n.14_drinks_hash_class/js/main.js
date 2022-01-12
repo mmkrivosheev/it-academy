@@ -1,26 +1,28 @@
-function HashStorageFunc() {
-    const storage = {};
-
-    this.addValue = function (key, value) {
-        storage[key] = value;
+class HashStorageClass {
+    constructor() {
+        this.storage = {};
     }
 
-    this.getValue = function (key) {
-        return storage[key];
+    addValue(key, value) {
+        this.storage[key] = value;
     }
 
-    this.deleteValue = function (key) {
-        if (!(key in storage)) return false;
-        delete storage[key];
+    getValue(key) {
+        return this.storage[key];
+    }
+
+    deleteValue(key) {
+        if (!(key in this.storage)) return false;
+        delete this.storage[key];
         return true;
     }
 
-    this.getKeys = function () {
-        return Object.keys(storage);
+    getKeys() {
+        return Object.keys(this.storage);
     }
 }
 
-const drinkStorage = new HashStorageFunc();
+const drinkStorage = new HashStorageClass();
 
 document.getElementById("btn-1").addEventListener("click", () => {
     let drink = "";
