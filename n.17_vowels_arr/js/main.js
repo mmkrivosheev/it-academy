@@ -34,9 +34,7 @@ function calculateVowelsByReduce(str) {
     const vowels = ["а", "у", "о", "и", "э", "ы", "е", "ё", "ю", "я"];
 
     str = [...str.toLowerCase()];
-    str = str.reduce((prev, cur) => {
-        return vowels.includes(cur) ? prev + cur : prev;
-    }, "");
-
-    return str.length;
+    return str.reduce((prev, cur) => {
+        return vowels.includes(cur) ? prev + 1 : prev;
+    }, 0);
 }
