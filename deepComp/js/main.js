@@ -30,6 +30,11 @@ function deepComp(src1, src2) {
 
         return true;
     }
+
+    throw {
+        name: "Error",
+        message: "Incorrect value passed to the function"
+    }
 }
 
 function checkIsSameType(src1, src2) {
