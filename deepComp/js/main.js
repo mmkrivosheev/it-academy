@@ -16,25 +16,18 @@ function deepComp(src1, src2) {
         return src1.every((n, i) => deepComp(n, src2[i]));
     }
 
-    if (typeof src1 === "object") {
-        if (Object.keys(src1).length !== Object.keys(src2).length)
-            return false;
+    if (Object.keys(src1).length !== Object.keys(src2).length)
+        return false;
 
-        for (let key in src1) {
-            if (!(key in src2)) return false;
+    for (let key in src1) {
+        if (!(key in src2)) return false;
 
-            if (deepComp(src1[key], src2[key])) continue;
+        if (deepComp(src1[key], src2[key])) continue;
 
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
-    throw {
-        name: "Error",
-        message: "Incorrect value passed to the function"
-    }
+    return true;
 }
 
 function checkIsSameType(src1, src2) {
