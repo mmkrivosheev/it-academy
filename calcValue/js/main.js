@@ -3,41 +3,54 @@ function calcValue(str) {
     if (isFinite(str)) return +str;
 
     const operator = ["*", "/", "-", "+"];
-    const memory = [];
+    let doubleOperator = false;
+    let memoryForParentheses = [];
     let arr = [];
-    let num = "";
+    let substr = "";
 
     for (let i = 0; i < str.length; i++) {
 
-        if (str[i] === "(" && !memory.length) {
-            memory.push("(");
-            continue;
+        if (str[i] === "(" && !memoryForParentheses.length) {
+            memoryForParentheses.push("(");
+            if (!doubleOperator) continue;
         }
 
-        if (str[i] === "(" && memory.length) {
-            memory.push("(");
+        if (str[i] === "(" && memoryForParentheses.length) {
+            memoryForParentheses.push("(");
         }
 
         if (str[i] === ")") {
-            memory.pop();
-            if (!memory.length) continue;
+            memoryForParentheses.pop();
+            if (!memoryForParentheses.length) continue;
         }
 
-        if (memory.length) {
-            num += str[i];
-            if (i === str.length - 2) arr.push(num);
+        if (memoryForParentheses.length) {
+            substr += str[i];
+
+            if (!doubleOperator) {
+                if (i === str.length - 2) arr.push(substr);
+                continue;
+            }
+
+            if (i === str.length - 1) arr.push(substr);
+
             continue;
         }
 
-        if (!(operator.includes(str[i]))) {
-            num += str[i];
-            if (i === str.length - 1) arr.push(num);
+        if (operator.includes(str[i]) && !operator.includes(str[i - 1])) {
+            doubleOperator = false;
+
+            if (operator.includes(str[i + 1]))
+                doubleOperator = true;
+
+            arr.push(substr);
+            substr = "";
+            arr.push(str[i]);
             continue;
         }
 
-        arr.push(num);
-        arr.push(str[i]);
-        num = "";
+        substr += str[i];
+        if (i === str.length - 1) arr.push(substr);
     }
 
     if (arr.length === 1) return calcValue(arr[0]);
@@ -102,6 +115,15 @@ let examples = [
     ["(2*(3-10))*10", -140],
     ["-10+50", 40],
     ["((((2*(2+8))+10)*2)+10)*(1+1)", 140],
+    ["2*-(3+2)", -10],
+    ["-(3+2)", -5],
+    ["2*(2+8)+(10+10)*(1+1)", 60],
+    ["2*(2+8)+(10+10)*+(1+1)", 60],
+    ["2*(2+8)+(10+10)*-(1+1)", -20],
+    ["-(10+10)*(1+1)", -40],
+    ["-(10+10)*-(1+1)", 40],
+    ["10*-2", -20],
+    ["2*-(10+10)*-(1+1)", 80],
 ];
 
 let count1 = 0;
@@ -119,9 +141,4 @@ console.log(
 );
 
 // console.log(calcValue("2*(-3+1)"));
-// console.log(calcValue("2*3-10*10"));
-// console.log(calcValue("(2*3-10*10)"));
-// console.log(calcValue("(2*3-10)*10"));
-// console.log(calcValue("(2*(3-10))*10"));
-// console.log(calcValue("-10+50"));
-// console.log(calcValue("((((2*(2+8))+10)*2)+10)*(1+1)"));
+// console.log(calcValue("2*-(3+2)"));
