@@ -1,6 +1,6 @@
 function getStringByTwoWords(start, end, set) {
     const arr = getWords(start, end, set);
-    return arr.join("-") || "в наборе нет подходящих слов";
+    return arr.join("-");
 }
 
 function getWords(start, end, set) {
@@ -36,6 +36,6 @@ function compareWords(word1, word2) {
 let set = ["ЛУЖА","МУЗА","ЛИРА","МЕХА","ЛИГА","ТАРА","ЛИПА","ТУРА","ПАРК",
     "ЛОЖЬ","ЛУПА","ПЛОТ","МУРА","ПАУК","ПАУТ","ПЛУТ","ЛОЖА","СЛОТ","ПАРА"];
 
-console.log(getStringByTwoWords("ЛИСА", "ЛОСЬ", set));
-console.log(getStringByTwoWords("МУХА", "СЛОН", set));
+console.log(getStringByTwoWords("ЛИСА", "ЛОСЬ", set) || "в наборе нет подходящих слов");
+console.log(getStringByTwoWords("МУХА", "СЛОН", set) || "в наборе нет подходящих слов");
 
