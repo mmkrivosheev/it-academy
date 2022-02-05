@@ -14,8 +14,13 @@ function dragdrop() {
         img.initY1 = img.offsetTop;
     }
 
-    document.addEventListener("mousedown", (e) => {
+    for (let img of images) {
+        img.style.position = "absolute";
+        img.style.left = img.initX1 + "px";
+        img.style.top = img.initY1 + "px";
+    }
 
+    document.addEventListener("mousedown", (e) => {
         if (e.button === 0 && e.target.tagName === "IMG") {
             e.preventDefault();
             const img = e.target;
@@ -26,7 +31,6 @@ function dragdrop() {
             initPos.x1 = img.initX1;
             initPos.y1 = img.initY1;
             mousedown = true;
-            img.style.position = "relative";
             img.style.cursor = "grab";
             curImg.style.zIndex = ++zIndex + "";
         }
@@ -38,8 +42,8 @@ function dragdrop() {
             const x2 = e.pageX;
             const y2 = e.pageY;
 
-            curImg.style.left = x2 - pointPos.x - initPos.x1 + "px";
-            curImg.style.top = y2 - pointPos.y - initPos.y1 + "px";
+            curImg.style.left = x2 - pointPos.x + "px";
+            curImg.style.top = y2 - pointPos.y + "px";
         }
     });
 
