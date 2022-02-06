@@ -1,9 +1,7 @@
 window.addEventListener("load", dragdrop);
 
 function dragdrop() {
-    const initPos = {};
     const pointPos = {};
-    let mousedown = false;
     let curImg;
     let zIndex = 0;
 
@@ -28,31 +26,27 @@ function dragdrop() {
             curImg = img;
             pointPos.x = e.pageX - img.offsetLeft;
             pointPos.y = e.pageY - img.offsetTop;
-            initPos.x1 = img.initX1;
-            initPos.y1 = img.initY1;
-            mousedown = true;
-            img.style.cursor = "grab";
+
+            curImg.addEventListener("mousemove", getMove);
             curImg.style.zIndex = ++zIndex + "";
-        }
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (mousedown) {
-            e.preventDefault();
-            const x2 = e.pageX;
-            const y2 = e.pageY;
-
-            curImg.style.left = x2 - pointPos.x + "px";
-            curImg.style.top = y2 - pointPos.y + "px";
+            img.style.cursor = "grab";
         }
     });
 
     document.addEventListener("mouseup", (e) => {
-        if (e.button === 0 && mousedown === true) {
+        if (e.button === 0) {
             e.preventDefault();
 
-            mousedown = false;
+            curImg.removeEventListener("mousemove", getMove);
             curImg.style.cursor = "default";
+
         }
     });
+
+    function getMove(e) {
+        e.preventDefault();
+
+        curImg.style.left = e.pageX - pointPos.x + "px";
+        curImg.style.top = e.pageY - pointPos.y + "px";
+    }
 }
