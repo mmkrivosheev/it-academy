@@ -27,7 +27,7 @@ function dragdrop() {
             pointPos.x = e.pageX - img.offsetLeft;
             pointPos.y = e.pageY - img.offsetTop;
 
-            curImg.addEventListener("mousemove", getMove);
+            document.addEventListener("mousemove", getMove);
             curImg.style.zIndex = ++zIndex + "";
             img.style.cursor = "grab";
         }
@@ -37,7 +37,7 @@ function dragdrop() {
         if (e.button === 0) {
             e.preventDefault();
 
-            curImg.removeEventListener("mousemove", getMove);
+            document.removeEventListener("mousemove", getMove);
             curImg.style.cursor = "default";
 
         }
