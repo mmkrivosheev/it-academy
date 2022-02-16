@@ -14,7 +14,7 @@ function validForm() {
     const wrapper = form_1.querySelector(".wrapper");
     developer.focus();
 
-        developer.addEventListener("blur", () => checkIsEmptyInput(developer));
+    developer.addEventListener("blur", () => checkIsEmptyInput(developer));
     siteName.addEventListener("blur", () => checkIsEmptyInput(siteName));
     siteUrl.addEventListener("blur", () => checkIsUrl(siteUrl));
     startDate.addEventListener("blur", () => checkIsDate(startDate));
@@ -26,7 +26,7 @@ function validForm() {
 
     for (let i of radio) {
         i.addEventListener("click", () => {
-            if(wrapper.classList.contains("error")) {
+            if (wrapper.classList.contains("error")) {
                 wrapper.classList.remove("error");
                 wrapper.lastChild.remove();
             }
