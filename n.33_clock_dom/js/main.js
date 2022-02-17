@@ -109,9 +109,7 @@ function buildClock(diameter) {
     hourHand.style.top = - hourHandHeight * shiftHourHand / 100 + "px";
     arrows.push(hourHand);
 
-    getStartingSecond(); //старт часов с начала новой секунды
     updateClock(data, clock, arrows);
-    setInterval(() => updateClock(data, clock, arrows), 1000);
 }
 
 function updateClock(data, clock, arrows) {
@@ -119,22 +117,18 @@ function updateClock(data, clock, arrows) {
     const seconds = date.getSeconds();
     const minutes = date.getMinutes();
     const hours = date.getHours();
+    const m = 1000 - (date % 1000); //определяю "m" - количество миллисекунд до следующей секунды
+    console.log(m);
 
     clock.append(...arrows);
     data.watch.innerHTML = formatDateTime(date) + "";
     data.secondHand.style.transform = "rotate(" + data.secondHandTurn * seconds + "deg)";
     data.minuteHand.style.transform = "rotate(" + data.minuteHandTurn * minutes + "deg)";
     data.hourHand.style.transform =
-        "rotate(" + (data.hourHandTurn * hours + data.hourHandTurnForMinute * minutes) + "deg)";
+       "rotate(" + (data.hourHandTurn * hours + data.hourHandTurnForMinute * minutes) + "deg)";
 
     console.log(formatDateTime(date));
-}
-
-function getStartingSecond() {
-    while (true) {
-        const date = new Date();
-        if (!(date % 1000)) break;
-    }
+    setTimeout(updateClock, m, data, clock, arrows); //указываю "m" в качестве задержки
 }
 
 function formatDateTime(dt) {
