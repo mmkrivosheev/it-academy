@@ -75,7 +75,6 @@ function buildClock(diameter) {
         const bodyY = dial.offsetTop + dial.offsetHeight / 2;
         const itemX = bodyX + (diameter / 2 - itemDiameter / 1.5) * Math.sin(angle);
         const itemY = bodyY - (diameter / 2 - itemDiameter / 1.5) * Math.cos(angle);
-
         item.style.left = Math.round(itemX - item.offsetWidth / 2) + "px";
         item.style.top = Math.round(itemY - item.offsetHeight / 2) + "px";
     }
@@ -109,6 +108,7 @@ function buildClock(diameter) {
     hourHand.style.top = - hourHandHeight * shiftHourHand / 100 + "px";
     arrows.push(hourHand);
 
+    clock.append(...arrows);
     updateClock(data, clock, arrows);
 }
 
@@ -120,12 +120,12 @@ function updateClock(data, clock, arrows) {
     const m = 1000 - (date % 1000); //определяю "m" - количество миллисекунд до следующей секунды
     console.log(m);
 
-    clock.append(...arrows);
     data.watch.innerHTML = formatDateTime(date) + "";
     data.secondHand.style.transform = "rotate(" + data.secondHandTurn * seconds + "deg)";
     data.minuteHand.style.transform = "rotate(" + data.minuteHandTurn * minutes + "deg)";
     data.hourHand.style.transform =
        "rotate(" + (data.hourHandTurn * hours + data.hourHandTurnForMinute * minutes) + "deg)";
+
 
     console.log(formatDateTime(date));
     setTimeout(updateClock, m, data, clock, arrows); //указываю "m" в качестве задержки
