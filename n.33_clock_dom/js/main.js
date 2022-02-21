@@ -71,10 +71,11 @@ function buildClock(diameter) {
         clock.prepend(item);
 
         const angle = i * 2 / items * Math.PI;
-        const bodyX = dial.offsetLeft + dial.offsetWidth / 2;
-        const bodyY = dial.offsetTop + dial.offsetHeight / 2;
-        const itemX = bodyX + (diameter / 2 - itemDiameter / 1.5) * Math.sin(angle);
-        const itemY = bodyY - (diameter / 2 - itemDiameter / 1.5) * Math.cos(angle);
+        const dialX = dial.offsetLeft + dial.offsetWidth / 2;
+        const dialY = dial.offsetTop + dial.offsetHeight / 2;
+        const itemX = dialX + (diameter / 2 - itemDiameter / 1.5) * Math.sin(angle);
+        const itemY = dialY - (diameter / 2 - itemDiameter / 1.5) * Math.cos(angle);
+
         item.style.left = Math.round(itemX - item.offsetWidth / 2) + "px";
         item.style.top = Math.round(itemY - item.offsetHeight / 2) + "px";
     }
@@ -109,16 +110,15 @@ function buildClock(diameter) {
     arrows.push(hourHand);
 
     clock.append(...arrows);
-    updateClock(data, clock, arrows);
+    updateClock(data);
 }
 
-function updateClock(data, clock, arrows) {
+function updateClock(data) {
     const date = new Date();
     const seconds = date.getSeconds();
     const minutes = date.getMinutes();
     const hours = date.getHours();
     const m = 1000 - (date % 1000); //определяю "m" - количество миллисекунд до следующей секунды
-    console.log(m);
 
     data.watch.innerHTML = formatDateTime(date) + "";
     data.secondHand.style.transform = "rotate(" + data.secondHandTurn * seconds + "deg)";
@@ -126,15 +126,14 @@ function updateClock(data, clock, arrows) {
     data.hourHand.style.transform =
        "rotate(" + (data.hourHandTurn * hours + data.hourHandTurnForMinute * minutes) + "deg)";
 
-
     console.log(formatDateTime(date));
-    setTimeout(updateClock, m, data, clock, arrows); //указываю "m" в качестве задержки
+    setTimeout(updateClock, m, data); //указываю "m" в качестве задержки
 }
 
 function formatDateTime(dt) {
-    const hours=dt.getHours();
-    const minutes=dt.getMinutes();
-    const seconds=dt.getSeconds();
+    const hours = dt.getHours();
+    const minutes = dt.getMinutes();
+    const seconds = dt.getSeconds();
 
     return str0l(str0l(hours, 2) + ':' + str0l(minutes, 2) + ':' + str0l(seconds, 2));
 }
