@@ -1,0 +1,53 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: #42484b;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.show-clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.show-clock .form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-clock .input {
+    font: inherit;
+    height: 20px;
+    margin: 10px;
+}
+
+.show-clock .error {
+    color: red;
+    position: absolute;
+    left: 100%;
+    width: 200px;
+}
+
+.show-clock button {
+    font: inherit;
+    padding: 5px;
+    margin: 10px;
+}
