@@ -117,6 +117,8 @@ function tick() {
         ball.posX = fieldWidth - ball.width;
         ball.speedX = 0;
         ball.speedY = 0;
+        racket_1.speedY = 0;
+        racket_2.speedY = 0;
         ball.update();
         result.innerHTML = updateResult(1);
         document.removeEventListener("keydown", movesRacket);
@@ -129,6 +131,8 @@ function tick() {
         ball.posX = 0;
         ball.speedX = 0;
         ball.speedY = 0;
+        racket_1.speedY = 0;
+        racket_2.speedY = 0;
         ball.update();
         result.innerHTML = updateResult(0);
         document.removeEventListener("keydown", movesRacket);
