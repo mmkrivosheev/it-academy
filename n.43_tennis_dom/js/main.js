@@ -1,6 +1,6 @@
 const fieldWidth = 600; // ширина поля
 const fieldHeight = 400; // высота поля
-const racketMove = 20; // смещение ракетки при нажатии кливиш управления
+const racketMove = 20; // смещение ракетки по оси Y при нажатии кливиш управления
 const button = document.querySelector(".button");
 const result = document.querySelector(".result");
 const field = document.querySelector(".field");
@@ -47,17 +47,19 @@ racket_2.update();
 document.addEventListener("keydown", moveRacket);
 button.addEventListener("click", start);
 
-function start() {
+function start(e) {
+    e.preventDefault();
     const m = (fieldHeight - ballElem.offsetHeight / 2) * ball.speedX * 10 / fieldWidth;
 
-    button.removeEventListener("click", start);
     button.blur();
+    button.removeEventListener("click", start);
     ball.posX = fieldWidth / 2 - ballElem.offsetWidth / 2;
     ball.posY = fieldHeight / 2 - ballElem.offsetHeight / 2;
     ball.update();
 
     ball.speedY = random(0, m) / 10; // скорость по оси Y - случайное число от 0 до m
 
+    // мячик в случайном направлении
     if (Math.random() < 0.5) {
         ball.speedX = -ball.speedX;
         ball.speedY = -ball.speedY;
@@ -125,6 +127,7 @@ function tick() {
 
 // изменяет позицию ракеток по оси Y при нажатии клавиш shift, ctrl, ↑, ↓
 function moveRacket(e) {
+    e.preventDefault();
 
     if (e.key === "Shift") {
         racket_1.posY -= racketMove;
