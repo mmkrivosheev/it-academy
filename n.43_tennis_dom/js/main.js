@@ -1,6 +1,6 @@
 const fieldWidth = 600; // ширина поля
 const fieldHeight = 400; // высота поля
-const racketMove = 20; // смещение ракетки по оси Y при нажатии кливиш управления
+const racketSpeedY = 8; // скорость ракетки
 const button = document.querySelector(".button");
 const result = document.querySelector(".result");
 const field = document.querySelector(".field");
@@ -10,6 +10,7 @@ const racketElem_2 = document.querySelector(".racket-2");
 
 const racket_1 = {
     posY: fieldHeight / 2 - racketElem_1.offsetHeight / 2,
+    speedY: 0,
 
     update() {
         racketElem_1.style.top = this.posY + "px";
@@ -18,6 +19,7 @@ const racket_1 = {
 
 const racket_2 = {
     posY: fieldHeight / 2 - racketElem_2.offsetHeight / 2,
+    speedY: 0,
 
     update() {
         racketElem_2.style.top = this.posY + "px";
@@ -29,8 +31,8 @@ const ball = {
     posY: fieldHeight / 2 - ballElem.offsetHeight / 2,
     width: ballElem.offsetWidth,
     height: ballElem.offsetHeight,
-    speedX: 3,
-    speedY: null,
+    speedX: 0,
+    speedY: 0,
 
     update() {
         ballElem.style.left = this.posX + "px";
@@ -44,34 +46,53 @@ field.style.height = fieldHeight + "px";
 ball.update();
 racket_1.update();
 racket_2.update();
-document.addEventListener("keydown", moveRacket);
+tick();
 button.addEventListener("click", start);
 
 function start(e) {
     e.preventDefault();
-    const m = (fieldHeight - ballElem.offsetHeight / 2) * ball.speedX * 10 / fieldWidth;
-
     button.blur();
+    document.addEventListener("keydown", movesRacket);
+    document.addEventListener("keyup", stopMovesRacket);
     button.removeEventListener("click", start);
     ball.posX = fieldWidth / 2 - ballElem.offsetWidth / 2;
     ball.posY = fieldHeight / 2 - ballElem.offsetHeight / 2;
     ball.update();
 
-    ball.speedY = random(0, m) / 10; // скорость по оси Y - случайное число от 0 до m
+    // задаю скорость мячику по оси X и Y
+    ball.speedX = 3;
+    const m = (fieldHeight - ballElem.offsetHeight / 2) * ball.speedX * 10 / fieldWidth;
+    ball.speedY = random(0, m) / 10;
 
     // мячик в случайном направлении
     if (Math.random() < 0.5) {
         ball.speedX = -ball.speedX;
         ball.speedY = -ball.speedY;
     }
-
-    tick();
 }
 
-// изменяет позицию мячика
+// изменяет позицию ракеток и мячика
 function tick() {
+    racket_1.posY += racket_1.speedY;
+    racket_2.posY += racket_2.speedY;
     ball.posX += ball.speedX;
     ball.posY += ball.speedY;
+
+    // если ракетка 1 уперлась в верхнюю границу поля
+    if (racket_1.posY < 0)
+        racket_1.posY = 0;
+
+    // если ракетка 1 уперлась в нижнюю границу поля
+    if (racket_1.posY + racketElem_1.offsetHeight > fieldHeight)
+        racket_1.posY = fieldHeight - racketElem_1.offsetHeight;
+
+    // если ракетка 2 уперлась в верхнюю границу поля
+    if (racket_2.posY < 0)
+        racket_2.posY = 0;
+
+    // если ракетка 2 уперлась в нижнюю границу поля
+    if (racket_2.posY + racketElem_2.offsetHeight > fieldHeight)
+        racket_2.posY = fieldHeight - racketElem_2.offsetHeight;
 
     // если мячик попадает в ракетку 2
     if (ball.posX + ball.width > fieldWidth - racketElem_2.offsetWidth &&
@@ -94,19 +115,25 @@ function tick() {
     // если мячик попадает в правую границу поля
     if (ball.posX + ball.width > fieldWidth) {
         ball.posX = fieldWidth - ball.width;
-        result.innerHTML = updateResult(1);
-        button.addEventListener("click", start);
+        ball.speedX = 0;
+        ball.speedY = 0;
         ball.update();
-        return;
+        result.innerHTML = updateResult(1);
+        document.removeEventListener("keydown", movesRacket);
+        document.removeEventListener("keyup", stopMovesRacket);
+        button.addEventListener("click", start);
     }
 
     // если мячик попадает в левую границу поля
     if (ball.posX < 0) {
         ball.posX = 0;
-        result.innerHTML = updateResult(0);
-        button.addEventListener("click", start);
+        ball.speedX = 0;
+        ball.speedY = 0;
         ball.update();
-        return;
+        result.innerHTML = updateResult(0);
+        document.removeEventListener("keydown", movesRacket);
+        document.removeEventListener("keyup", stopMovesRacket);
+        button.addEventListener("click", start);
     }
 
     // если мячик попадает в левую нижнюю поля
@@ -121,49 +148,38 @@ function tick() {
         ball.posY = 0;
     }
 
+    racket_1.update();
+    racket_2.update();
     ball.update();
     setTimeout(tick, 20);
 }
 
-// изменяет позицию ракеток по оси Y при нажатии клавиш shift, ctrl, ↑, ↓
-function moveRacket(e) {
+// добавляет скорость ракетам по оси Y
+function movesRacket(e) {
     e.preventDefault();
 
-    if (e.key === "Shift") {
-        racket_1.posY -= racketMove;
+    if (e.key === "Shift")
+        racket_1.speedY = -racketSpeedY;
 
-        if (racket_1.posY < 0)
-            racket_1.posY = 0;
+    if (e.key === "Control")
+        racket_1.speedY = racketSpeedY;
 
-        racket_1.update();
-    }
+    if (e.key === "ArrowUp")
+        racket_2.speedY = -racketSpeedY;
 
-    if (e.key === "Control") {
-        racket_1.posY += racketMove;
+    if (e.key === "ArrowDown")
+        racket_2.speedY = racketSpeedY;
+}
 
-        if (racket_1.posY + racketElem_1.offsetHeight > fieldHeight)
-            racket_1.posY = fieldHeight - racketElem_1.offsetHeight;
+// збрасывает на ноль скорость ракеток по оси Y
+function stopMovesRacket(e) {
+    e.preventDefault();
 
-        racket_1.update();
-    }
+    if (e.key === "Shift" || e.key === "Control")
+        racket_1.speedY = 0;
 
-    if (e.key === "ArrowUp") {
-        racket_2.posY -= racketMove;
-
-        if (racket_2.posY < 0)
-            racket_2.posY = 0;
-
-        racket_2.update();
-    }
-
-    if (e.key === "ArrowDown") {
-        racket_2.posY += racketMove;
-
-        if (racket_2.posY + racketElem_2.offsetHeight > fieldHeight)
-            racket_2.posY = fieldHeight - racketElem_2.offsetHeight;
-
-        racket_2.update();
-    }
+    if (e.key === "ArrowUp" || e.key === "ArrowDown")
+        racket_2.speedY = 0;
 }
 
 // создает строку с обновленным результатом
