@@ -140,13 +140,13 @@ function tick() {
         button.addEventListener("click", start);
     }
 
-    // если мячик попадает в левую нижнюю поля
+    // если мячик попадает в нижнюю границу поля
     if (ball.posY + ball.height > fieldHeight) {
         ball.speedY = -ball.speedY;
         ball.posY = fieldHeight - ball.height;
     }
 
-    // если мячик попадает в верхнюю нижнюю поля
+    // если мячик попадает в верхнюю границу поля
     if (ball.posY < 0) {
         ball.speedY = -ball.speedY;
         ball.posY = 0;

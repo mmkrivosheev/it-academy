@@ -1,0 +1,87 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: #42484b;
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-svg {
+    margin: 5px 0 5px 0;
+    user-select: none;
+}
+
+.button-svg:hover {
+    cursor: pointer;
+}
+
+.button-svg:active {
+    outline: 1px solid #778899;
+}
+
+.button-body {
+    stroke: #778899;
+    stroke-width: 1px;
+    fill: #e8e5e5;
+}
+
+.button-text {
+    font-weight: 400;
+    text-anchor: middle;
+}
+
+.result {
+    font-size: 30px;
+    font-weight: 500;
+    margin-right: 50%;
+    transform: translateX(50%);
+}
+
+.field-svg {
+    position: relative;
+    border: 1px solid #778899;
+    background-color: #f0ee7e;
+}
+
+.field-body {
+    stroke: #778899;
+    stroke-width: 1px;
+    fill: #f0ee7e;
+}
+
+.racket-1 {
+    fill: #09aa57;
+}
+
+.racket-2 {
+    fill: #191497;
+}
+
+.ball {
+    fill: #f02137;
+}
