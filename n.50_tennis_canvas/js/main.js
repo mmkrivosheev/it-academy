@@ -79,8 +79,8 @@ function tick() {
 
     // если мячик попадает в ракетку 2
     if (ball.posX + ballSize / 2 > fieldWidth - racketWidth &&
-        ball.posY + ballSize / 2 > racket_2.posY &&
-        ball.posY + ballSize / 2 < racket_2.posY + racketHeight) {
+        ball.posY > racket_2.posY &&
+        ball.posY < racket_2.posY + racketHeight) {
 
         ball.speedX = -ball.speedX;
         ball.posX = fieldWidth - ballSize / 2 - racketWidth;
@@ -88,8 +88,8 @@ function tick() {
 
     // если мячик попадает в ракетку 1
     if (ball.posX - ballSize / 2 < racketWidth &&
-        ball.posY + ballSize / 2 > racket_1.posY &&
-        ball.posY + ballSize / 2 < racket_1.posY + racketHeight) {
+        ball.posY > racket_1.posY &&
+        ball.posY < racket_1.posY + racketHeight) {
 
         ball.speedX = -ball.speedX;
         ball.posX = racketWidth + ballSize / 2;
