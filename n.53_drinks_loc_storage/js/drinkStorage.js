@@ -1,4 +1,4 @@
-const drinkStorage = new LocalStorage();
+const drinkStorage = new LocalStorage("drinkStorage");
 
 document.querySelector(".drink .btn-1").addEventListener("click", () => {
     let drink = "";

@@ -1,14 +1,15 @@
 class LocalStorage {
-    constructor() {
-        this.storage = localStorage.storage
-            ? JSON.parse(localStorage.getItem("storage"))
+    constructor(name) {
+        this.storageName = name;
+        this.storage = localStorage[name]
+            ? JSON.parse(localStorage.getItem(name))
             : {};
     }
 
     addValue(key, value) {
         this.storage[key] = value;
         const json = JSON.stringify(this.storage);
-        localStorage.setItem("storage", json);
+        localStorage.setItem(this.storageName, json);
     }
 
     getValue(key) {
@@ -19,7 +20,7 @@ class LocalStorage {
         if (!(key in this.storage)) return false;
         delete this.storage[key];
         const json = JSON.stringify(this.storage);
-        localStorage.setItem("storage", json);
+        localStorage.setItem(this.storageName, json);
         return true;
     }
 

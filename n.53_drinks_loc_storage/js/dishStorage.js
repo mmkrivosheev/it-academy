@@ -1,4 +1,4 @@
-const dishStorage = new LocalStorage();
+const dishStorage = new LocalStorage("dishStorage");
 
 document.querySelector(".dish .btn-1").addEventListener("click", () => {
     let dish = "";
