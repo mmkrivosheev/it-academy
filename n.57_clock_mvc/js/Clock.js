@@ -23,7 +23,7 @@ class Clock {
 
     updateClock() {
         let date = new Date();
-        date = date.setHours(date.getHours() + this.timeZone);
+        date = date.setHours(date.getUTCHours() + this.timeZone);
         this.date = new Date(date);
         const m = 1000 - (this.date % 1000);
         if (!this.isStop) this.clockView.update();
