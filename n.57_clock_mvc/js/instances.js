@@ -1,0 +1,65 @@
+const CLASS_CLOCK_1 = ".dom-1";
+const TIME_ZONE_1 = -5;
+const controller1 = new ClockControllerButtons();
+const modal1 = new Clock(CLASS_CLOCK_1, TIME_ZONE_1);
+const viewDOM1 = new ClockViewDOM();
+controller1.start(modal1);
+modal1.start(viewDOM1);
+viewDOM1.start(modal1);
+controller1.addListener();
+modal1.buildClock();
+
+const CLASS_CLOCK_2 = ".dom-2";
+const TIME_ZONE_2 = +3;
+const controller2 = new ClockControllerButtons();
+const modal2 = new Clock(CLASS_CLOCK_2, TIME_ZONE_2);
+const viewDOM2 = new ClockViewDOM();
+controller2.start(modal2);
+modal2.start(viewDOM2);
+viewDOM2.start(modal2);
+controller2.addListener();
+modal2.buildClock();
+
+const CLASS_CLOCK_3 = ".svg-1";
+const TIME_ZONE_3 = 0;
+const controller3 = new ClockControllerButtons();
+const modal3 = new Clock(CLASS_CLOCK_3, TIME_ZONE_3);
+const viewSVG3 = new ClockViewSVG();
+controller3.start(modal3);
+modal3.start(viewSVG3);
+viewSVG3.start(modal3);
+controller3.addListener();
+modal3.buildClock();
+
+const CLASS_CLOCK_4 = ".svg-2";
+const TIME_ZONE_4 = +9;
+const controller4 = new ClockControllerButtons();
+const modal4 = new Clock(CLASS_CLOCK_4, TIME_ZONE_4);
+const viewSVG4 = new ClockViewSVG();
+controller4.start(modal4);
+modal4.start(viewSVG4);
+viewSVG4.start(modal4);
+controller4.addListener();
+modal4.buildClock();
+
+const CLASS_CLOCK_5 = ".cvs-1";
+const TIME_ZONE_5 = +1;
+const controller5 = new ClockControllerButtons();
+const modal5 = new Clock(CLASS_CLOCK_5, TIME_ZONE_5);
+const viewCVS5 = new ClockViewCanvas();
+controller5.start(modal5);
+modal5.start(viewCVS5);
+viewCVS5.start(modal5);
+controller5.addListener();
+modal5.buildClock();
+
+const CLASS_CLOCK_6 = ".cvs-2";
+const TIME_ZONE_6 = +10;
+const controller6 = new ClockControllerButtons();
+const modal6 = new Clock(CLASS_CLOCK_6, TIME_ZONE_6);
+const viewCVS6 = new ClockViewCanvas();
+controller6.start(modal6);
+modal6.start(viewCVS6);
+viewCVS6.start(modal6);
+controller6.addListener();
+modal6.buildClock();

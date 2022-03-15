@@ -1,0 +1,141 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: #42484b;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.control {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.btn {
+    font: inherit;
+    padding: 5px;
+    margin: 5px;
+}
+
+.clock-dom {
+    position: relative;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 150px;
+}
+
+.clock-svg {
+    width: 250px;
+    height: 250px;
+    margin: 25px;
+}
+
+.clock-cvs {
+    width: 250px;
+    height: 250px;
+    margin: 25px;
+}
+
+.dial {
+    background-color: #fcca66;
+    border-radius: 50%;
+    position: absolute;
+    z-index: -1;
+}
+
+.item {
+    background-color: #48b382;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.watch {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+.second-hand {
+    position: absolute;
+    z-index: 30;
+    box-shadow: inset 0 0 3px #5a646d;
+    background-color: #42484b;
+}
+
+.minute-hand {
+    position: absolute;
+    z-index: 20;
+    box-shadow: inset 0 0 3px #5a646d;
+    background-color: #42484b;
+}
+
+.hour-hand {
+    position: absolute;
+    z-index: 10;
+    box-shadow: inset 0 0 3px #5a646d;
+    background-color: #42484b;
+}
+
+.clock-svg .dial {
+    fill: #fcca66;
+}
+
+.clock-svg .item-circle {
+    fill: #48b382;
+}
+
+.clock-svg .item-text {
+    fill: #42484b;
+    text-anchor: middle;
+}
+
+.clock-svg .watch {
+    fill: #42484b;
+    text-anchor: middle;
+}
+
+.clock-svg .second-hand {
+    fill: #42484b;
+    stroke: #565b5e;
+}
+
+.clock-svg .minute-hand {
+    fill: #42484b;
+    stroke: #565b5e;
+}
+
+.clock-svg .hour-hand {
+    fill: #42484b;
+    stroke: #565b5e;
+}
