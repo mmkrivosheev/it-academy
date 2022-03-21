@@ -1,0 +1,57 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: #000;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    margin: 20px;
+    padding: 10px;
+}
+
+.form .item {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.form span {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.form span label {
+    margin: 3px;
+}
+
+.item > label {
+    width: 180px;
+}
+
+.form input {
+    height: 20px;
+}
+
+.form textarea {
+    flex-grow: 1;
+    height: 60px;
+    resize: none;
+}
+
+.form select {
+    font: inherit;
+    width: 210px;
+    height: 25px;
+}
+
+.form button {
+    font: inherit;
+    padding: 5px;
+}
