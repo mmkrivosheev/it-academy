@@ -32,11 +32,10 @@ class AJAXStorageClass {
 
 function getData(obj) {
     obj.lockInterface();
-    updatePassword = Math.random();
 
     $.ajax({
         url: ajaxHandlerScript, type: "POST", cache: false,dataType: "json",
-        data: { f: 'LOCKGET', n: obj.storageName, p: updatePassword },
+        data: { f: "READ", n: obj.storageName },
         success: readReady, error: errorHandler
     });
 
@@ -54,17 +53,31 @@ function getData(obj) {
 }
 
 function updateData(storageName, storage) {
-    $.ajax({
-            url : ajaxHandlerScript, type : "POST", cache : false, dataType: "json",
-            data : { f: "UPDATE", n: storageName, v: JSON.stringify(storage), p: updatePassword },
-            success : updateReady,
-            error : errorHandler
-        }
-    );
+    updatePassword = Math.random();
 
-    function updateReady(callResult) {
+    $.ajax({
+        url: ajaxHandlerScript, type: "POST", cache: false,dataType: "json",
+        data: { f: "LOCKGET", n: storageName, p: updatePassword },
+        success: update, error: errorHandler
+    });
+
+    function update(callResult) {
         if (callResult.error !== undefined)
             alert(callResult.error);
+        else {
+            $.ajax({
+                    url: ajaxHandlerScript, type: "POST", cache: false, dataType: "json",
+                    data: {f: "UPDATE", n: storageName, v: JSON.stringify(storage), p: updatePassword},
+                    success: updateReady,
+                    error: errorHandler
+                }
+            );
+
+            function updateReady(callResult) {
+                if (callResult.error !== undefined)
+                    alert(callResult.error);
+            }
+        }
     }
 }
 
