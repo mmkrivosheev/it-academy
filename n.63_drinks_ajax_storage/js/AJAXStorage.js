@@ -44,7 +44,7 @@ function getData(obj) {
             alert(callResult.error);
         else {
             obj.storage = (callResult.result !== "")
-                ? {...JSON.parse(callResult.result)}
+                ? JSON.parse(callResult.result)
                 : {};
         }
 
